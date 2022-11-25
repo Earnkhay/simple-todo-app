@@ -1,13 +1,14 @@
 <template>
-      <div class="container mt-5">
+      <div class="container mt-3">
     <div class="row justify-content-center">
     <div class="col-md-12">
 
       <!-- Button trigger modal -->
-        <button type="button" class="btn fw-bold" id="new" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          <span class="ps-3 pe-1"><i class="fa-solid fa-circle-plus"></i></span>Create New
-        </button>
-
+      <div class="d-flex justify-content-end">
+            <button type="button" class="btn fw-bold mt-1" id="new" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-circle-plus"></i>
+            </button>
+      </div>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -19,20 +20,19 @@
             <form action="" >
             <div class="modal-body">
                     <div class="mb-3">
-                      <label for="exampleFormControlInput1" class="form-label">New Task</label>
                       <input @keydown.prevent.enter="addTask" class="form-control" type="text" placeholder="Input new Task" v-model="title">
                     </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="addTask">Add</button>
+                <button type="button" class="btn btn-info fw-bold" data-bs-dismiss="modal" @click.prevent="addTask">Add</button>
             </div>
             </form>
             </div>
         </div>
         </div>
 
-      <h5>Recent Tasks</h5>                   
+      <h5>All Todos</h5>                   
            <!-- <div class="container"> -->
               <div class="row justify-content-center">
                 <div class="card row m-2 col-md-7 todocard" v-for="(task, index) in tasks" :key="index" :class="[task.done ? 'success' : 'bg-light' ]">
@@ -124,9 +124,8 @@ export default class HomeView extends Vue {
             task.done = !task.done
           }
       })
-        console.log(taskToUpdate, 'hello', this.tasks);
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
-        console.log(this.tasks);
+        // console.log(this.tasks);
     }
     removeTask(task){
         this.tasks = this.tasks.filter((data) => {
@@ -154,10 +153,8 @@ export default class HomeView extends Vue {
                 return data
             }
         })
-
         result.unshift(currentTask)
-        console.log(result);
-
+        // console.log(result);
         localStorage.setItem('tasks', JSON.stringify(result));
     }    
 }
@@ -171,6 +168,7 @@ export default class HomeView extends Vue {
     }
     #new:hover{
         color: black;
+        font-size: 15px;
     }
     #dashboard:hover{
         background-color: rgb(68, 68, 170);
@@ -181,7 +179,6 @@ export default class HomeView extends Vue {
         border-bottom: 1px groove;
         padding: 20px;
         font-weight: bold;
-        text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
     }
 
     li{

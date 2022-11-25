@@ -1,5 +1,5 @@
 <template>
-  <div class="container p-3 fw-bold">
+  <div class="container p-3 fw-bold mt-3">
     <h2 class="fw-bold">Good {{ greet() }}</h2>
     <p>Welcome to your todo app, create new todo below</p>
   </div>
