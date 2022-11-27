@@ -1,7 +1,7 @@
 <template>
   <div class="container p-3 fw-bold mt-3">
     <h2 class="fw-bold">Good {{ greet() }}</h2>
-    <p>Welcome to your todo app, create new todo below</p>
+    <h4>Welcome to your todo app, create new todo below</h4>
   </div>
 
   <div class="container btngroup">
@@ -57,7 +57,7 @@ export default class HomeView extends Vue {
     }
 
     h2{
-      text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
+      text-shadow: 1px 2px rgba(0, 0, 0, 0.25);
     }
 
     .sh{
