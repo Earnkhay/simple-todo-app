@@ -1,30 +1,25 @@
 <template>
     <div class="container mt-3">
-  <div class="row justify-content-center">
-  <div class="col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
     <h5>Completed Todos</h5>                   
             <div class="row justify-content-center">
               <div class="card row m-2 col-md-7 todocard" v-for="(completedtask, index) in completedtasks" :key="index" :class="[completedtask.done ? 'success' : 'bg-light' ]">
                   <div class="card-body d-flex justify-content-between">
                       <div class="fw-bold text-wrap text-break" :class="[completedtask.done ?  'text-decoration-line-through' : 'text-dark']">{{ completedtask.title }}</div>
                   </div>
+              </div>
             </div>
-          </div>
-  </div>
-  </div>
+        </div>
+    </div>
   </div>
   <router-view/>
 </template>
 
 <script>
-import { Options, Vue } from 'vue-class-component';
+import { Vue } from 'vue-class-component';
 
-@Options({
-components: {
-},
-})
 export default class completedView extends Vue {
-//   tasks = []
   currentTask = '' 
   title = ''
   done = false
@@ -36,8 +31,7 @@ export default class completedView extends Vue {
             if (t.done == true) {
                 return t
             }
-        })
-      // console.log('hello', this.completedtasks);
+    })
   }
 }
 </script>

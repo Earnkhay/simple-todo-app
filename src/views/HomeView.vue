@@ -1,40 +1,39 @@
 <template>
-      <div class="container mt-3">
-    <div class="row justify-content-center">
-    <div class="col-md-12">
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
 
-      <!-- Button trigger modal -->
-      <div class="d-flex justify-content-end">
-            <button type="button" class="btn fw-bold mt-1" id="new" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <i class="fa-solid fa-circle-plus"></i>
-            </button>
-      </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Create New Task</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <!-- Button trigger modal -->
+            <div class="d-flex justify-content-center">
+                    <button type="button" class="btn fw-bold mt-1" id="new" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <span class="ps-3 pe-1"><i class="fa-solid fa-circle-plus"></i></span>Create New
+                    </button>
             </div>
-            <form action="" >
-            <div class="modal-body">
-                    <div class="mb-3">
-                      <input @keydown.prevent.enter="addTask" class="form-control" type="text" placeholder="Input new Task" v-model="title">
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Create New Task</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="" >
+                        <div class="modal-body">
+                                <div class="mb-3">
+                                <input @keydown.prevent.enter="addTask" class="form-control" type="text" placeholder="Input new Task" v-model="title">
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-info fw-bold" data-bs-dismiss="modal" @click.prevent="addTask">Add</button>
+                        </div>
+                        </form>
+                        </div>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-info fw-bold" data-bs-dismiss="modal" @click.prevent="addTask">Add</button>
-            </div>
-            </form>
-            </div>
-        </div>
-        </div>
+                </div>
 
       <h5>All Todos</h5>                   
-           <!-- <div class="container"> -->
-              <div class="row justify-content-center">
+            <div class="row justify-content-center">
                 <div class="card row m-2 col-md-7 todocard" v-for="(task, index) in tasks" :key="index" :class="[task.done ? 'success' : 'bg-light' ]">
                     <div class="card-body d-flex justify-content-between">
                         <div class="form-check pt-0 ps-4">
@@ -46,35 +45,33 @@
                             <button class="bg-danger border-danger mx-1 delbtn" @click="removeTask(task)"><i class="fa-solid fa-trash text-light" ></i></button>
                         </div>
                     </div>
-              </div>
+                </div>
             </div>
-        <!-- </div> -->
-    </div>
+        </div>
     
       <!-- Edit Modal -->
-      <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit current Task</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" >
-            <div class="modal-body">
-                    <div class="mb-3">
-                      <label for="exampleFormControlInput1" class="form-label">Edit Task</label>
-                      <input @keydown.prevent.enter="updateTask(currentTask)" class="form-control" type="text" placeholder="Input new Task" v-model="editTitle">
+            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit current Task</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="updateTask(currentTask)"> Save Changes</button>
-            </div>
-            </form>
+                    <form action="" >
+                    <div class="modal-body">
+                            <div class="mb-3">
+                            <input @keydown.prevent.enter="updateTask(currentTask)" class="form-control" type="text" placeholder="Input new Task" v-model="editTitle">
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click.prevent="updateTask(currentTask)"> Save Changes</button>
+                    </div>
+                    </form>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
-    </div>
     </div>
     <router-view/>
 </template>
@@ -93,6 +90,8 @@ export default class HomeView extends Vue {
     name = ""
     done = false
     editTitle = ''
+    searchName = ""
+    searchActive = false
     
     mounted (){
         this.tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -119,13 +118,12 @@ export default class HomeView extends Vue {
       //       }
       //   })
         
-        const taskToUpdate = this.tasks.find((t) => {
+        this.tasks.find((t) => {
           if(t === task){
             task.done = !task.done
           }
       })
         localStorage.setItem("tasks", JSON.stringify(this.tasks));
-        // console.log(this.tasks);
     }
     removeTask(task){
         this.tasks = this.tasks.filter((data) => {
@@ -154,7 +152,6 @@ export default class HomeView extends Vue {
             }
         })
         result.unshift(currentTask)
-        // console.log(result);
         localStorage.setItem('tasks', JSON.stringify(result));
     }    
 }
